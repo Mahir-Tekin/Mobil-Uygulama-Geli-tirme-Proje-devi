@@ -3,6 +3,7 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 
+
 const firebaseConfig = {
     apiKey: "AIzaSyDXQeQa0imbTgPADQRyIIn-Bp2Bscwhkps",
     authDomain: "hotel-f7a51.firebaseapp.com",
@@ -14,6 +15,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+console.log("Firebase başarıyla başlatıldı:", app);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
