@@ -3,21 +3,27 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../firebaseConfig'; 
+import { getFirestore, doc, setDoc } from 'firebase/firestore';
 
 function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const auth = getAuth(app);
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Kayıt başarılı
+      .then(async (userCredential) => {
+        const db = getFirestore(app);
+        await setDoc(doc(db, 'users', userCredential.user.uid), {
+          name: name,
+          role: 'user'
+        });
+  
         Alert.alert('Başarılı', 'Hesap oluşturuldu!');
         navigation.navigate('Login');
       })
       .catch((error) => {
-        // Kayıt başarısız
         Alert.alert('Hata', error.message);
       });
   };
@@ -31,6 +37,12 @@ function SignUpScreen({ navigation }) {
         value={email}
         onChangeText={setEmail}
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Kullanıcı Adı"
+        value={name}
+        onChangeText={setName}
+     />
       <TextInput
         style={styles.input}
         placeholder="Şifre"
