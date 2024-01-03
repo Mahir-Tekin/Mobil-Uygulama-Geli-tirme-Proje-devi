@@ -18,8 +18,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     overflow: 'hidden',
     margin: 10,
-    elevation: 3, // Android için gölge efekti
-    shadowColor: 'black', // iOS için gölge efekti
+    elevation: 3, 
+    shadowColor: 'black', 
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     shadowOpacity: 0.3,
