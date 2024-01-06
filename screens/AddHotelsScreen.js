@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { app } from '../firebaseConfig';
+import { useNavigation } from '@react-navigation/native';
+
 
 function AddHotelScreen() {
+  const navigation = useNavigation();
   const [photo, setPhoto] = useState('');
   const [rate, setRate] = useState('');
   const [name, setName] = useState('');
@@ -29,17 +32,16 @@ function AddHotelScreen() {
         name,
         place,
       });
-      Alert.alert('Başarılı', 'Otel başarıyla eklendi!');
-      setPhoto('');
-      setRate('');
-      setName('');
-      setPlace('');
+      Alert.alert('Başarılı', 'Otel başarıyla eklendi!', [
+        { text: 'Tamam', onPress: () => navigation.goBack() }
+      ]);
     } catch (error) {
       Alert.alert('Hata', 'Otel eklenirken bir hata oluştu: ' + error.message);
     }
   };
 
   return (
+    
     <View style={styles.container}>
       <TextInput
         style={styles.input}
@@ -66,7 +68,9 @@ function AddHotelScreen() {
         value={place}
         onChangeText={setPlace}
       />
-      <Button title="Otel Ekle" onPress={handleSubmit} />
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <Text style={styles.buttonText}>Otel Ekle</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -79,10 +83,21 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: 'gray',
+    borderColor: '#694fad',
     padding: 10,
     marginBottom: 20,
     borderRadius: 5,
+  },
+  button: {
+    backgroundColor: '#694fad', 
+    padding: 15,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white', 
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

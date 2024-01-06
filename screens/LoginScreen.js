@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     marginBottom: 30,
-    color: '#333', 
+    color: '#694fad', 
   },
   input: {
     width: '100%',
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
-    backgroundColor: '#007bff', 
+    backgroundColor: '#694fad', 
     padding: 15,
     justifyContent: 'center',
     alignItems: 'center',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   signupButton: {
-    color: '#007bff', 
+    color: '#694fad', 
     fontSize: 16,
   },
 });

@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
   rating: {
     fontSize: 16,
-    color: 'gold',
+    color: '#694fad',
   },
 });
 

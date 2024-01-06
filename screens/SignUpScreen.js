@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { app } from '../firebaseConfig'; 
 import { getFirestore, doc, setDoc } from 'firebase/firestore';
@@ -42,7 +42,7 @@ function SignUpScreen({ navigation }) {
         placeholder="Kullanıcı Adı"
         value={name}
         onChangeText={setName}
-     />
+      />
       <TextInput
         style={styles.input}
         placeholder="Şifre"
@@ -50,31 +50,50 @@ function SignUpScreen({ navigation }) {
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Kayıt Ol" onPress={handleSignUp} />
+      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <Text style={styles.buttonText}>Kayıt Ol</Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 20,
-      },
-      title: {
-        fontSize: 24,
-        marginBottom: 20,
-      },
-      input: {
-        width: '100%',
-        borderWidth: 1,
-        borderColor: 'gray',
-        padding: 10,
-        marginBottom: 20,
-        borderRadius: 5,
-      },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#f5f5f5', // Arka plan rengi
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    fontWeight: 'bold',
+    color: '#694fad', // Başlık rengi
+  },
+  input: {
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#694fad', // Giriş alanı çerçevesi rengi
+    backgroundColor: '#fff', // Giriş alanı arka plan rengi
+    padding: 15,
+    marginBottom: 20,
+    borderRadius: 8,
+  },
+  button: {
+    width: '100%',
+    backgroundColor: '#694fad', // Buton arka plan rengi
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: '#fff', // Buton yazı rengi
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });
 
 export default SignUpScreen;

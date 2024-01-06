@@ -24,6 +24,9 @@ function RoomsScreen({ route }) {
 
   return (
     <View style={styles.container}>
+        <View style={styles.header}>
+        <Text style={styles.headerText}>Rezervasyon.Com</Text>
+      </View>
       <FlatList
         data={rooms}
         keyExtractor={(item) => item.id}
@@ -43,6 +46,17 @@ function RoomsScreen({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  header: {
+    backgroundColor: '#694fad', 
+    padding: 20,
+    alignItems: 'center',
+  },
+  headerText: {
+      marginTop:10,
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   addButton: {
     position: 'absolute',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { app } from '../firebaseConfig';
 
@@ -33,7 +33,9 @@ const AddRoomScreen = ({ route }) => {
   
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Oda Ekleme Ekranı</Text>
+        <View style={styles.header}>
+        <Text style={styles.headerText}>Rezervasyon.Com</Text>
+      </View>
         <TextInput
           style={styles.input}
           placeholder="Oda Fotoğrafı URL"
@@ -53,20 +55,28 @@ const AddRoomScreen = ({ route }) => {
           onChangeText={setRoomPrice}
           keyboardType="numeric"
         />
-        <Button title="Oda Ekle" onPress={handleAddRoom} />
+        <TouchableOpacity style={styles.buttonContainer} onPress={handleAddRoom}>
+        <Text style={styles.buttonText}>Oda Ekle</Text>
+        </TouchableOpacity>
       </View>
     );
   };
   
   const styles = StyleSheet.create({
+    header: {
+      backgroundColor: '#694fad', 
+      padding: 20,
+      alignItems: 'center',
+    },
+    headerText: {
+      marginTop: 10,
+      color: 'white',
+      fontSize: 24,
+      fontWeight: 'bold',
+    },
     container: {
       flex: 1,
-      padding: 20,
-    },
-    title: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      marginBottom: 20,
+      backgroundColor: '#f5f5f5', 
     },
     input: {
       width: '100%',
@@ -75,6 +85,18 @@ const AddRoomScreen = ({ route }) => {
       padding: 10,
       marginBottom: 20,
       borderRadius: 5,
+      backgroundColor: 'white', 
+    },
+    buttonContainer: {
+      backgroundColor: '#694fad', 
+      borderRadius: 5,
+      padding: 10,
+      marginTop: 10,
+    },
+    buttonText: {
+      color: 'white', 
+      textAlign: 'center',
+      fontSize: 16,
     },
   });
   

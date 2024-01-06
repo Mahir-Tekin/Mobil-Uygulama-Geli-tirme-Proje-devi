@@ -1,8 +1,11 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const ShowAdminRoom = ({ room }) => {
+    const navigation = useNavigation();
   return (
+    <TouchableOpacity onPress={() => navigation.navigate('BookScreen', { roomId: room.id })}>
     <View style={styles.card}>
       <Image source={{ uri: room.photo }} style={styles.image} />
       <View style={styles.infoContainer}>
@@ -10,6 +13,7 @@ const ShowAdminRoom = ({ room }) => {
         <Text style={styles.price}>{`Fiyat: ${room.price}₺`}</Text>
       </View>
     </View>
+    </TouchableOpacity>
   );
 };
 
