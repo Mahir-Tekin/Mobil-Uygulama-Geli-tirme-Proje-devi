@@ -1,41 +1,57 @@
-import React from 'react';
-import { View, FlatList,StyleSheet,Text } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import { app } from '../firebaseConfig';
 import ShowHotel from '../components/ShowHotel';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
-function HomeScreen() {
-  const hotels = [
-    { id: '1', title: 'Otel 1', imageUrl: 'https://example.com/otel1.jpg', rating: 4.5 },
-    { id: '2', title: 'Otel 1', imageUrl: 'https://example.com/otel1.jpg', rating: 4.5 },
-    { id: '3', title: 'Otel 1', imageUrl: 'https://example.com/otel1.jpg', rating: 4.5 },
-    { id: '4', title: 'Otel 1', imageUrl: 'https://example.com/otel1.jpg', rating: 4.5 },
-  ];
+function HomeScreen({ navigation }) {
+  const [hotels, setHotels] = useState([]);
+  const db = getFirestore(app);
+
+  useEffect(() => {
+    fetchHotels();
+  }, []);
+
+  const fetchHotels = async () => {
+    const querySnapshot = await getDocs(collection(db, 'Hotels'));
+    const hotelsData = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setHotels(hotelsData);
+  };
 
   return (
-    <View>
-        <View style={styles.header}>
+    <View style={styles.container}>
+      <View style={styles.header}>
         <Text style={styles.headerText}>Rezervasyon.Com</Text>
-        </View>
+      </View>
       <FlatList
         data={hotels}
-        renderItem={({ item }) => <ShowHotel hotel={item} />}
         keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ShowHotel
+            hotel={item}
+          />
+        )}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-    header: {
-      backgroundColor: '#694fad', 
-      padding: 20,
-      alignItems: 'center',
-    },
-    headerText: {
-        marginTop:10,
-      color: 'white',
-      fontSize: 24,
-      fontWeight: 'bold',
-    },
-  });
+  header: {
+    backgroundColor: '#694fad', 
+    padding: 20,
+    alignItems: 'center',
+  },
+  headerText: {
+    marginTop:10,
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  container: {
+    flex: 1,
+    paddingBottom: 10,
+  },
+});
 
 export default HomeScreen;

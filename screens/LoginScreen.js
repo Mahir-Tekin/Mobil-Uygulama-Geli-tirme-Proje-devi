@@ -37,6 +37,7 @@ function LoginScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Giriş Yap</Text>
+      <Text style={styles.title}>admin hesap=Test123@gmail.com  şifre=1231234</Text>
       <TextInput
         style={styles.input}
         placeholder="E-posta"
